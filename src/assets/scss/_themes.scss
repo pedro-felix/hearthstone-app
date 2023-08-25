@@ -1,0 +1,73 @@
+html {
+    background: #231642 url(../img/background.jpeg) no-repeat top center;
+}
+
+.error {
+    background: transparent url(../img/bg-error.png) no-repeat bottom right;
+    background-size: 30%;
+}
+
+.btn {
+    background-color: var(--button-color-primary);
+    outline: none;
+    border-radius: 0.8rem;
+    color: white;
+    padding: 0 2.4rem;
+    font-size: 1.6rem;
+    line-height: 4.8rem;
+    cursor: pointer;
+    transition: background-color 0.5s;
+
+    &:hover {
+        background-color: var(--button-color-primary-hover);
+    }
+}
+
+.icon {
+    color: var(--button-color-primary);
+    background-color: black;
+    border-radius: 50%;
+    font-size: 3rem;
+    cursor: pointer;
+    padding: 2rem;
+    background-clip: content-box;
+
+    &:hover {
+        color: var(--button-color-primary-hover);
+    }
+}
+
+.modal-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.modal-appear, .modal-enter, .modal-exit-active, .modal-exit-done {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+
+.modal-appear-active, .modal-appear-done, .modal-enter-active, .modal-enter-done {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.modal-appear-active, .modal-enter-active, .modal-exit-active {
+    transition: opacity .5s, transform .5s;
+}
+
+.card-exit {
+    opacity: 1;
+}
+
+.card-appear, .card-enter, .card-exit-active, .card-exit-done {
+    opacity: 0;
+}
+
+.card-appear-active, .card-appear-done, .card-enter-active, .card-enter-done {
+    opacity: 1;
+}
+
+.card-appear-active, .card-enter-active, .card-exit-active {
+    transition: opacity 1.5s;
+}

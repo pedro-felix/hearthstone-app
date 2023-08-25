@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header/Header';
+import CardsList from './components/CardsList/CardsList';
+import {useFetchCards} from './hooks/useFetchAllCards';
+import Footer from './components/Footer/Footer';
+import Loading from './components/Loading/Loading';
+import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [ isLoading, error, allCards ] = useFetchCards();
+    
+    return (
+        <>
+            <Header />
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <CardsList allCards={allCards} />
+            )}
+            {error && <ErrorMessage errorLabel={error} />}
+            <Footer />
+        </>
+    );
 }
 
 export default App;

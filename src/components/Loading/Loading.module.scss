@@ -1,0 +1,24 @@
+.loading {
+    padding: 3%;
+    overflow: hidden;
+
+    img {
+        width: 50rem;
+        animation: rotation 3s ease infinite;
+    }
+
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @media (max-width: 576px) {
+        img {
+            max-width: 100%;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+.footer {
+    background-color: black;
+    width: 100%;
+    color: var(--blue);
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    font-size: .8rem;
+    text-align: center;
+
+    img {
+        width: 8rem;
+    }
+}

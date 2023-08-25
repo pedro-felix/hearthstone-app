@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/hearthstone-app/static/css/main.09004338.css",
+    "main.css": "/hearthstone-app/static/css/main.be866bcd.css",
     "main.js": "/hearthstone-app/static/js/main.016f725e.js",
     "static/js/787.29403640.chunk.js": "/hearthstone-app/static/js/787.29403640.chunk.js",
     "static/media/bg-error.png": "/hearthstone-app/static/media/bg-error.36759423a1bfcc8d04a2.png",
@@ -242,12 +242,12 @@
     "static/media/header_logo.avif": "/hearthstone-app/static/media/header_logo.7b593c323f15220a5817.avif",
     "static/media/loader.svg": "/hearthstone-app/static/media/loader.f91c2cd9f1b3d6549f7f65fe44572e0b.svg",
     "index.html": "/hearthstone-app/index.html",
-    "main.09004338.css.map": "/hearthstone-app/static/css/main.09004338.css.map",
+    "main.be866bcd.css.map": "/hearthstone-app/static/css/main.be866bcd.css.map",
     "main.016f725e.js.map": "/hearthstone-app/static/js/main.016f725e.js.map",
     "787.29403640.chunk.js.map": "/hearthstone-app/static/js/787.29403640.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.09004338.css",
+    "static/css/main.be866bcd.css",
     "static/js/main.016f725e.js"
   ]
 }

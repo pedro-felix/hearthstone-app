@@ -25,7 +25,7 @@ const CardModal = forwardRef(({ card, setTransitionModal}, ref) => {
 
     useEffect(() => {
         document.addEventListener('keydown', function(e) {
-            if (e.code === 'Escape') setTransitionModal(false);
+            if (e.code === 'Escape') setTransitionModal();
         });
     }, [setTransitionModal]);
 

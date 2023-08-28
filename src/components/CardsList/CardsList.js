@@ -1,20 +1,17 @@
 import { useRef, createRef, useState, useEffect } from 'react';
 import styles from './CardsList.module.scss';
 import Filter from '../Filter/Filter';
-import { randomNumber } from '../Helpers';
 import CardModal from '../CardModal/CardModal';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { CSSTransition } from 'react-transition-group';
 
-function CardsList({allCards}) {
+function CardsList({randombackCard, allCards}) {
     let filteredCards = allCards,
         iteration = 30;
 
     const [itemsToShow, setitemsToShow] = useState(iteration),
         [sortFilters, setSortFilters] = useState({}),
         [showCardModal, setshowCardModal] = useState(null),
-        backCards = require.context('../../assets/img/back-cards/', true),
-        backCardsList = backCards.keys().map(backCard => backCards(backCard)),
         refCards = useRef([]),
         [transitionModal, setTransitionModal] = useState(false),
         [transitionCard, setTransitionCard] = useState(true),
@@ -26,7 +23,12 @@ function CardsList({allCards}) {
                 filterValue = filter[1];
             
             filteredCards = filteredCards.filter((card) => {
-                return (typeof card[filterKey] !== 'undefined' && card[filterKey].toString() === filterValue);
+                if(filterValue.slice(-1) === '+') {
+                    return (typeof card[filterKey] !== 'undefined' && card[filterKey] >= +filterValue.slice(0, -1));
+                }
+                else {
+                    return (typeof card[filterKey] !== 'undefined' && card[filterKey].toString() === filterValue);
+                }
             });
         });
     }
@@ -61,7 +63,7 @@ function CardsList({allCards}) {
     return (
         <>
             {showCardModal && (
-                <CSSTransition in={transitionModal} nodeRef={modalRef} timeout={500} classNames='modal' appear unmountOnExit onExited={() => setshowCardModal(null)}>
+                <CSSTransition in={transitionModal} nodeRef={modalRef} timeout={500} classNames='modal' appear unmountOnExit>
                     <CardModal ref={modalRef} card={showCardModal} setTransitionModal={setTransitionModal} />
                 </CSSTransition>
             )}
@@ -81,7 +83,7 @@ function CardsList({allCards}) {
                                         className="icon fa-icon fa-solid fa-circle-info"
                                     ></i>
                                     <img src={card.img} alt="{card.name}" />
-                                    <div style={{backgroundImage: `url(${backCardsList[randomNumber(1, 233)]})`}}>
+                                    <div style={{backgroundImage: randombackCard}}>
                                     </div>
                                 </li>
                             </CSSTransition>

@@ -1,9 +1,11 @@
 import {useFetchInfos} from '../../hooks/useFetchInfos';
 import styles from './Filter.module.scss';
 import Loading from '../Loading/Loading';
+import { useState } from 'react';
 
-function Filter({sortFilters, setSortFilters, resetItemsToShow}) {
+function Filter({sortFilters, setSortFilters, fuseSearch, resetItemsToShow}) {
     const[isLoading, error, filterTypes] = useFetchInfos(),
+        [inputValue, setInputValue] = useState(''),
         keysTitlesObject = {
             'rarity': 'Rareté',
             'type': 'Type',
@@ -25,8 +27,23 @@ function Filter({sortFilters, setSortFilters, resetItemsToShow}) {
 
     function resetValue(valueName) {
         resetItemsToShow();
-        if (valueName === 'allFilters') return setSortFilters({});
+        if (valueName === 'allFilters') {
+            resetSearchByName();
+            setSortFilters({});
+            return;
+        }
         setSortFilters((filters) => Object.fromEntries(Object.entries(sortFilters).filter((filter) => filter[0] !== valueName)));
+    }
+
+    function resetSearchByName() {
+        setInputValue('');
+        fuseSearch({'target': {'value': ''}});
+    }
+
+    function handleInputValue(e) {
+        e.stopPropagation();
+        setInputValue(e.target.value);
+        fuseSearch(e);
     }
 
     return (
@@ -36,7 +53,7 @@ function Filter({sortFilters, setSortFilters, resetItemsToShow}) {
                     <Loading />
                 ) : (
                     <>
-                        {(Object.entries(sortFilters).length > 1) &&
+                        {(Object.entries(sortFilters).length > 1 || (Object.entries(sortFilters).length > 0 && inputValue.length > 0) ) &&
                             <i onClick={() => resetValue('allFilters')} className="icon fa-solid fa-circle-xmark"></i>
                         }
                         <ul className='d-flex flex-row flex-wrap'>
@@ -53,6 +70,12 @@ function Filter({sortFilters, setSortFilters, resetItemsToShow}) {
                                 }
                             </li>
                             )}
+                            <li>
+                                <input type="text" onChange={handleInputValue} value={inputValue} placeholder='Recherche par nom' />
+                                {inputValue.length > 0 &&
+                                <i onClick={resetSearchByName} className="icon fa-solid fa-circle-xmark"></i>
+                                }
+                            </li>
                         </ul>
                     </>
                 )}

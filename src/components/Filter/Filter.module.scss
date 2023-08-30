@@ -1,12 +1,12 @@
 .cardFilters {
     position: sticky;
-    top: 12rem;
+    top: 7rem;
     box-shadow: var(--box-shadow-nav);
     backdrop-filter: blur(0.5rem);
     z-index: 1;
-    animation: adjust-card-filter linear both;
-    animation-timeline: scroll();
-    animation-range: 0 20rem;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.4rem;
 
     > section img {
         width: 6.25rem;
@@ -14,12 +14,13 @@
 
     > i {
         font-size: 2.2rem;
+        padding: 0.5rem 0 0.5rem 0.5rem;
     }
 
     ul {
         justify-content: space-evenly;
         gap: 1.5rem;
-        padding: 2rem;
+        padding: 0.5rem;
 
         li {
             position: relative;
@@ -36,7 +37,7 @@
             select {
                 background-color: black;
                 color: white;
-                border: .1rem solid black;
+                border: 0.1rem solid black;
                 border-radius: 0.4rem;
                 outline: none;
 
@@ -44,12 +45,25 @@
                     font-style: italic;
                 }
             }
+
+            input {
+                background-color: black;
+                outline: none;
+                border: none;
+                border-radius: 0.4rem;
+                color: white;
+                padding: 0.5rem;
+                height: 2.25rem;
+    
+                &::placeholder {
+                    color: white;
+                    font-style: italic;
+                }
+            }
         }
     }
 
-    @keyframes adjust-card-filter {
-        to {
-            top: 7rem;
-        }
+    @media (max-width: 576px) {
+        flex-direction: column !important;
     }
 }

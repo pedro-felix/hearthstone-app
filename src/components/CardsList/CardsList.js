@@ -4,9 +4,10 @@ import Filter from '../Filter/Filter';
 import CardModal from '../CardModal/CardModal';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { CSSTransition } from 'react-transition-group';
+import Fuse from 'fuse.js';
 
 function CardsList({randombackCard, allCards}) {
-    let filteredCards = allCards,
+    let filteredCards,
         iteration = 30;
 
     const [itemsToShow, setitemsToShow] = useState(iteration),
@@ -15,14 +16,36 @@ function CardsList({randombackCard, allCards}) {
         refCards = useRef([]),
         [transitionModal, setTransitionModal] = useState(false),
         [transitionCard, setTransitionCard] = useState(true),
-        modalRef = useRef(null);
+        modalRef = useRef(null),
+        [searchResults, setSearchResults] = useState(allCards),
+        fuseOptions = {
+            includeScore: true,
+            includeMatches: true,
+            keys: ['name']
+        },
+        fuse = new Fuse(searchResults, fuseOptions);
+
+    function fuseSearch(event) {
+        const { value } = event.target;
+
+        if (value.length === 0) {
+            setSearchResults(allCards);
+            return;
+        }
+    
+        const results = fuse.search(value);
+        const items = results.map((result) => result.item);
+        setSearchResults(items);
+    }
+
+    filteredCards = searchResults;
 
     if(Object.entries(sortFilters).length) {
         Object.entries(sortFilters).forEach((filter) => {
             const filterKey = filter[0],
                 filterValue = filter[1];
             
-            filteredCards = filteredCards.filter((card) => {
+            filteredCards = searchResults.filter((card) => {
                 if(filterValue.slice(-1) === '+') {
                     return (typeof card[filterKey] !== 'undefined' && card[filterKey] >= +filterValue.slice(0, -1));
                 }
@@ -33,7 +56,7 @@ function CardsList({randombackCard, allCards}) {
         });
     }
 
-    refCards.current = filteredCards.map((element, i) => refCards.current[i] ?? createRef());
+    refCards.current = searchResults.map((element, i) => refCards.current[i] ?? createRef());
 
     function flipCard(refCard) {
         const effectClassName = 'flip';
@@ -51,14 +74,14 @@ function CardsList({randombackCard, allCards}) {
     useEffect(() => {
         window.addEventListener('scroll', () => {
             if (Math.ceil((window.innerHeight + window.scrollY) + 350) > document.body.offsetHeight) {
-                if (itemsToShow < filteredCards.length) {
+                if (itemsToShow < searchResults.length) {
                     setitemsToShow(itemsToShow + iteration);
                     setTransitionCard(() => true);
                 }
             }
         });
         return () => window.removeEventListener('scroll', {});
-    },[itemsToShow, iteration, filteredCards]);
+    },[itemsToShow, iteration, searchResults]);
 
     return (
         <>
@@ -67,7 +90,7 @@ function CardsList({randombackCard, allCards}) {
                     <CardModal ref={modalRef} card={showCardModal} setTransitionModal={setTransitionModal} />
                 </CSSTransition>
             )}
-            <Filter sortFilters={sortFilters} setSortFilters={setSortFilters} resetItemsToShow={resetItemsToShow} />
+            <Filter sortFilters={sortFilters} setSortFilters={setSortFilters} fuseSearch={fuseSearch} resetItemsToShow={resetItemsToShow} />
             {Object.keys(filteredCards).length ? (
                 <section id="cardsList" className={styles.cardsList}>
                     <ul className='d-flex flex-row align-items-center flex-wrap mb-50'>

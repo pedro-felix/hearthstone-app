@@ -1,6 +1,6 @@
 const CARDS_API = 'https://omgvamp-hearthstone-v1.p.rapidapi.com',
     headers = {
-        'X-RapidAPI-Key': '1578ff5a10msha72b327352e02b2p17cf2cjsn3f679bdf4eca',
+        'X-RapidAPI-Key': process.env.REACT_APP_AUTH_TOKEN,
         'X-RapidAPI-Host': 'omgvamp-hearthstone-v1.p.rapidapi.com'
     };
 

@@ -10,7 +10,7 @@ function App() {
     const [ isLoading, error, allCards ] = useFetchCards(),
         backCards = require.context('./assets/img/back-cards/', true),
         backCardsList = backCards.keys().map(backCard => backCards(backCard)),
-        randombackCard = `url(${backCardsList[randomNumber(1, 233)]})`;
+        randombackCard = `url(${backCardsList[randomNumber(1, 232)]})`;
 
     return (
         <>

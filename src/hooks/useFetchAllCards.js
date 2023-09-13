@@ -23,9 +23,7 @@ export function useFetchCards() {
                                 card.img && allSortedCards.push(card);
                             })
                         ));
-                    allSortedCards.forEach(cards => {
-                        
-                    });
+
                     setAllCards((x) => [...x, ...allSortedCards]);
                 }
             } catch (e) {

@@ -29,7 +29,7 @@ export function useFetchCards() {
                     setAllCards((x) => [...x, ...allSortedCards]);
                 }
             } catch (e) {
-                setError(e);
+                setError(e.message);
             } finally {
                 if (!cancel) {
                     setIsLoading(false);

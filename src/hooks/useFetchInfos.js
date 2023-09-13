@@ -41,7 +41,7 @@ export function useFetchInfos () {
                     setCardsInfos(filteredInfos);
                 }
             } catch (e) {
-                setError('Erreur');
+                setError(e.message);
             } finally {
                 if (!cancel) {
                     setIsLoading(false);

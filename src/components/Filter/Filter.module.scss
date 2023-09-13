@@ -54,12 +54,23 @@
                 color: white;
                 padding: 0.5rem;
                 height: 2.25rem;
-    
+
                 &::placeholder {
                     color: white;
                     font-style: italic;
                 }
             }
+        }
+    }
+
+    :global .error {
+        background-image: none;
+        height: 100%;
+        padding-top: 0;
+        font-size: auto;
+
+        label {
+            font-size: 2.2rem;
         }
     }
 

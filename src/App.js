@@ -15,12 +15,15 @@ function App() {
     return (
         <>
             <Header />
-            {isLoading ? (
-                <Loading />
+            {error ? (
+                <ErrorMessage errorLabel={error} />
             ) : (
-                <CardsList randombackCard={randombackCard} allCards={allCards} />
+                isLoading ? (
+                    <Loading />
+                ) : (
+                    <CardsList randombackCard={randombackCard} allCards={allCards} />
+                )
             )}
-            {error && <ErrorMessage errorLabel={error} />}
             <Footer />
         </>
     );

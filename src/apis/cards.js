@@ -15,7 +15,7 @@ export async function getInfos() {
         const cardsInfos = await response.json();
         return cardsInfos;
     } else {
-        throw new Error('Error fetch cardsInfos');
+        throw new Error('Une erreur est survenue pendant la récupération des données.');
     }
 }
 
@@ -30,6 +30,6 @@ export async function getAllCards(localeParam) {
         const cardsData = await response.json();
         return cardsData;
     } else {
-        throw new Error('Error fetch cards');
+        throw new Error('Une erreur est survenue pendant la récupération des données.');
     }
 }
